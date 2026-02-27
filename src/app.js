@@ -21,3 +21,6 @@ AFRAME.registerComponent('hide-overlay', hideOverlayComponent)
 
 import {deviceOrientationComponent} from './components/device-orientation.js'
 AFRAME.registerComponent('device-orientation', deviceOrientationComponent)
+
+import {presentBoxComponent} from './components/present-box'
+AFRAME.registerComponent('present-box', presentBoxComponent)

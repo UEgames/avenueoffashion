@@ -56,6 +56,17 @@
   </div>
 </div>
 
+<div id="giftModal">
+  <div id="giftModalContent">
+    <button id="giftClose">&#x2715;</button>
+    <h2>You've won a gift certificate from us!</h2>
+    <p>Enter your email and we'll send it to you.</p>
+    <input type="email" id="giftEmail" placeholder="your@email.com" />
+    <button id="giftSubmit">Send My Gift</button>
+    <p id="giftConfirm" style="display:none">Thanks! Check your inbox.</p>
+  </div>
+</div>
+
 <a-scene
   xrextras-loading
   xrextras-runtime-error
@@ -66,7 +77,8 @@
   xrconfig
   xrlayers
   xrweb
-  device-orientation>
+  device-orientation
+  present-box>
   <a-assets>
     <!-- V1 Label: cylindrical wrap around midsection (default) -->
     <a-asset-item id="balloon" src="./assets/models/balloon-label.glb"></a-asset-item>
@@ -114,7 +126,10 @@
   <!-- World Effects Scene -->
 
   <!-- Scene Camera for Sky Effects and World Effects Scenes -->
-  <a-camera id="camera" wasd-controls-enabled="false" position="0 3 0"></a-camera>
+  <a-camera id="camera" wasd-controls-enabled="false" position="0 3 0">
+    <a-entity cursor="fuse: false; rayOrigin: mouse"
+              raycaster="objects: .clickable; far: 100"></a-entity>
+  </a-camera>
 
   <!-- Ambient and Directional Light with shadows for the World Scene (consistent with sky scene lighting) -->
   <a-entity light="type: ambient; intensity: 0.75;"></a-entity>
@@ -146,6 +161,21 @@
     shadow>
   </a-box>
 </a-scene>
+
+<script>
+  document.getElementById('giftClose').addEventListener('click', () => {
+    document.getElementById('giftModal').style.display = 'none'
+  })
+  document.getElementById('giftSubmit').addEventListener('click', () => {
+    const email = document.getElementById('giftEmail').value
+    if (email) {
+      document.getElementById('giftConfirm').style.display = 'block'
+      document.getElementById('giftSubmit').style.display = 'none'
+      // TODO: wire up actual email delivery endpoint
+      console.log('Gift certificate email:', email)
+    }
+  })
+</script>
 
 </body>
 
