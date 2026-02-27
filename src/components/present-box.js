@@ -41,7 +41,7 @@ const presentBoxComponent = {
     // Keep click for desktop; use touchend + manual raycast for 8th Wall mobile
     // (8th Wall's XR canvas intercepts touch events before A-Frame cursor can dispatch click)
     const showModal = () => {
-      document.getElementById('giftModal').style.display = 'flex'
+      showDirectory()  // global function defined in index.html script block
     }
 
     box.addEventListener('click', showModal)

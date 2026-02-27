@@ -56,6 +56,30 @@
   </div>
 </div>
 
+<!-- Directory modal -->
+<div id="directoryModal">
+  <div id="directorySign">
+    <div id="directoryRoof"></div>
+    <div id="directoryTitleBand"><span>Participating Businesses</span></div>
+    <div id="directoryList">
+      <!-- populated by JS from BUSINESSES array -->
+    </div>
+    <button id="directoryClose">&#x2715;</button>
+  </div>
+</div>
+
+<!-- Business detail modal -->
+<div id="detailModal">
+  <div id="detailContent">
+    <button id="detailBack">&#8592; Back</button>
+    <div id="detailLogo"></div>
+    <div id="detailAccent"></div>
+    <h2 id="detailName"></h2>
+    <p id="detailPrize"></p>
+    <button id="detailClaim">Claim Prize</button>
+  </div>
+</div>
+
 <div id="giftModal">
   <div id="giftModalContent">
     <button id="giftClose">&#x2715;</button>
@@ -165,6 +189,97 @@
 </a-scene>
 
 <script>
+  // ── Business data ──────────────────────────────────────────────────────────
+  const BUSINESSES = [
+    { name: 'Threads & Co.',    prize: 'Win a $50 gift card!',        color: '#D72638', logo: 'assets/logos/threads.png'   },
+    { name: 'The Style Loft',   prize: 'Win a free styling session!', color: '#1a3a6b', logo: 'assets/logos/styleloft.png' },
+    { name: 'Luxe Accessories', prize: 'Win a $30 store credit!',     color: '#2a7d4b', logo: 'assets/logos/luxe.png'      },
+    { name: 'Urban Sole',       prize: 'Win a free pair of socks!',   color: '#c47a00', logo: 'assets/logos/urbansole.png' },
+    { name: 'Glam Beauty Bar',  prize: 'Win a full makeover!',        color: '#7b2d8b', logo: 'assets/logos/glam.png'      },
+  ]
+
+  // ── Directory helpers ──────────────────────────────────────────────────────
+  function showDirectory() {
+    // Populate rows (idempotent — rebuild each time in case data changes)
+    const list = document.getElementById('directoryList')
+    list.innerHTML = ''
+    BUSINESSES.forEach((biz, i) => {
+      const row = document.createElement('div')
+      row.className = 'bizRow'
+      row.style.background = biz.color
+
+      const logoBox = document.createElement('div')
+      logoBox.className = 'bizLogo'
+      const img = document.createElement('img')
+      img.src = biz.logo
+      img.alt = biz.name
+      img.onerror = function () {
+        this.style.display = 'none'
+        logoBox.textContent = biz.name.charAt(0)
+      }
+      logoBox.appendChild(img)
+
+      const nameEl = document.createElement('span')
+      nameEl.className = 'bizName'
+      nameEl.textContent = biz.name
+
+      const chevron = document.createElement('span')
+      chevron.className = 'bizChevron'
+      chevron.textContent = '›'
+
+      row.appendChild(logoBox)
+      row.appendChild(nameEl)
+      row.appendChild(chevron)
+      row.addEventListener('click', () => showDetail(i))
+      list.appendChild(row)
+    })
+
+    document.getElementById('directoryModal').style.display = 'flex'
+  }
+
+  function showDetail(index) {
+    const biz = BUSINESSES[index]
+
+    // Logo
+    const logoEl = document.getElementById('detailLogo')
+    logoEl.innerHTML = ''
+    const img = document.createElement('img')
+    img.src = biz.logo
+    img.alt = biz.name
+    img.onerror = function () {
+      this.style.display = 'none'
+      logoEl.textContent = biz.name.charAt(0)
+    }
+    logoEl.appendChild(img)
+
+    document.getElementById('detailAccent').style.background = biz.color
+    document.getElementById('detailName').textContent = biz.name
+    document.getElementById('detailPrize').textContent = biz.prize
+
+    document.getElementById('directoryModal').style.display = 'none'
+    document.getElementById('detailModal').style.display = 'flex'
+  }
+
+  // ── Directory / detail wiring ──────────────────────────────────────────────
+  document.getElementById('directoryClose').addEventListener('click', () => {
+    document.getElementById('directoryModal').style.display = 'none'
+  })
+
+  document.getElementById('detailBack').addEventListener('click', () => {
+    document.getElementById('detailModal').style.display = 'none'
+    document.getElementById('directoryModal').style.display = 'flex'
+  })
+
+  document.getElementById('detailClaim').addEventListener('click', () => {
+    document.getElementById('detailModal').style.display = 'none'
+    // Reset gift modal state in case it was used before
+    document.getElementById('giftConfirm').style.display = 'none'
+    document.getElementById('giftSubmit').style.display = ''
+    document.getElementById('giftEmail').value = ''
+    document.getElementById('giftModal').style.display = 'flex'
+  })
+
+  // ── Gift modal wiring ──────────────────────────────────────────────────────
   document.getElementById('giftClose').addEventListener('click', () => {
     document.getElementById('giftModal').style.display = 'none'
   })
