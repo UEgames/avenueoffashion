@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "WebSearch",
+      "WebFetch(domain:www.8thwall.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:forum.8thwall.com)",
+      "WebFetch(domain:lightship.dev)",
+      "WebFetch(domain:www.nianticspatial.com)",
+      "Bash(git log:*)",
+      "Bash(read commit:*)",
+      "Bash(ngrok:*)",
+      "Bash(where ngrok:*)",
+      "Bash(\"C:/Program Files/Blender Foundation/Blender 3.5/blender.exe\":*)",
+      "Bash(npm install:*)",
+      "Bash(curl:*)",
+      "Bash(do echo:*)",
+      "Bash(python3:*)",
+      "Bash(python3.exe:*)",
+      "Bash(python:*)",
+      "Bash(identify:*)",
+      "Bash(head:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(ls:*)",
+      "Bash(/c/Users/jwolf/AppData/Local/Programs/Python/Python312/python:*)",
+      "Bash(gh auth:*)",
+      "Bash(git config:*)",
+      "Bash(git:*)"
+    ]
+  }
+}
