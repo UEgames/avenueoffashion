@@ -13,48 +13,24 @@ const presentBoxComponent = {
     box.setAttribute('class', 'clickable')
     box.setAttribute('position', '0 -0.5 -6')
 
-    // Box body
-    const body = document.createElement('a-box')
-    body.setAttribute('scale', '0.5 0.5 0.5')
-    body.setAttribute('material', 'color: #D72638')
-    box.appendChild(body)
+    box.setAttribute('gltf-model', '#present2')
+    box.setAttribute('scale', '1.5 1.5 1.5')
 
-    // Ribbon horizontal (runs along X axis)
-    const ribH = document.createElement('a-box')
-    ribH.setAttribute('scale', '0.52 0.06 0.06')
-    ribH.setAttribute('position', '0 0 0')
-    ribH.setAttribute('material', 'color: #FFD700')
-    box.appendChild(ribH)
-
-    // Ribbon vertical (runs along Z axis)
-    const ribV = document.createElement('a-box')
-    ribV.setAttribute('scale', '0.06 0.06 0.52')
-    ribV.setAttribute('position', '0 0 0')
-    ribV.setAttribute('material', 'color: #FFD700')
-    box.appendChild(ribV)
-
-    // Ribbon top (flat cross on lid)
-    const ribTop = document.createElement('a-box')
-    ribTop.setAttribute('scale', '0.52 0.06 0.52')
-    ribTop.setAttribute('position', '0 0.28 0')
-    ribTop.setAttribute('material', 'color: #FFD700')
-    box.appendChild(ribTop)
-
-    // Pop-up animation: rises from below ground to just above it
+    // Pop-up animation: rises from below ground, lands at basket level
     box.setAttribute('animation', {
       property: 'position',
       from: '0 -0.5 -6',
-      to: '0 0.5 -6',
+      to: '0 0.15 -6',
       dur: 700,
       easing: 'easeOutElastic',
       delay: 0,
     })
 
-    // Idle bob animation: gentle float after pop completes
+    // Idle bob: dips low into basket so top/bow is visible, then rises clear
     box.setAttribute('animation__bob', {
       property: 'position',
-      from: '0 0.5 -6',
-      to: '0 0.65 -6',
+      from: '0 0.15 -6',
+      to: '0 0.75 -6',
       dur: 1200,
       dir: 'alternate',
       loop: true,
