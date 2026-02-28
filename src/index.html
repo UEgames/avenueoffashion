@@ -104,8 +104,10 @@
   device-orientation
   present-box>
   <a-assets>
-    <!-- V1 Label: cylindrical wrap around midsection (default) -->
-    <a-asset-item id="balloon" src="./assets/models/balloon-label.glb"></a-asset-item>
+    <!-- V3 Both: label on front + back faces (default) -->
+    <a-asset-item id="balloon" src="./assets/models/balloon-both.glb"></a-asset-item>
+    <!-- V1 Label: label on front face only — activated via ?v=label -->
+    <a-asset-item id="balloon-label" src="./assets/models/balloon-label.glb"></a-asset-item>
     <!-- V2 Stamp: flat projection on front face — activated via ?v=stamp -->
     <a-asset-item id="balloon-stamp" src="./assets/models/balloon-stamp.glb"></a-asset-item>
     <a-asset-item id="present" src="./assets/models/present.glb"></a-asset-item>

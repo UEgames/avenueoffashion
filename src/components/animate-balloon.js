@@ -23,6 +23,16 @@ const animateBalloonComponent = {
         loop: false,
       })
 
+      // Slow continuous rotation in sky scene
+      this.el.setAttribute('animation__rotate', {
+        property: 'rotation',
+        from: '0 0 0',
+        to: '0 360 0',
+        dur: 12000,
+        easing: 'linear',
+        loop: true,
+      })
+
       this.el.sceneEl.addEventListener('transition-end', (event) => {
         balloon = event.detail.newEntity  // Grab the handle to the new Balloon Entity after it transitions from Sky Scene to World Scene
         balloon.setAttribute('id', 'newBalloon')
@@ -40,6 +50,16 @@ const animateBalloonComponent = {
           delay: 0,
           easing: 'easeOutQuad',
           loop: false,
+        })
+
+        // Slow continuous rotation in world scene
+        balloon.setAttribute('animation__rotate', {
+          property: 'rotation',
+          from: '0 0 0',
+          to: '0 360 0',
+          dur: 12000,
+          easing: 'linear',
+          loop: true,
         })
       })
 
