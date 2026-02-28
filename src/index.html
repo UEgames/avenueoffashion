@@ -5,11 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>skyeffectsworldtracking</title>
-  <meta itemprop="name" content="skyeffectsworldtracking">
-  <meta name="twitter:title" content="skyeffectsworldtracking">
-  <meta property="og:title" content="skyeffectsworldtracking">
-  <meta property="og:site_name" content="skyeffectsworldtracking">
+  <title>4thSpace</title>
+  <meta itemprop="name" content="4thSpace">
+  <meta name="twitter:title" content="4thSpace">
+  <meta property="og:title" content="4thSpace">
+  <meta property="og:site_name" content="4thSpace">
   <meta name="description" content="">
   <meta itemprop="description" content="">
   <meta property="og:description" content="">
@@ -22,16 +22,6 @@
   </script>
 
 
-<!-- Copyright (c) 2023 8th Wall, Inc. -->
-<!-- head.html is optional; elements will be added to your html head before app.js is loaded. -->
-
-<!-- Use "8thwall:" meta tags to hook into 8th Wall's build process and developer tools. -->
-<meta name="8thwall:renderer" content="aframe:1.4.1"/>
-<meta name="8thwall:package" content="@8thwall.landing-page"/>
-<meta name="8thwall:package" content="@8thwall.xrextras"/> 
-<meta name="8thwall:package" content="@8thwall.coaching-overlay"/>
- 
-<!-- Other external scripts and meta tags can also be added. -->
 <script crossorigin="anonymous" src="./external/scripts/aframe-extras-6.1.1.min.js"></script>
 
 
@@ -47,8 +37,10 @@
   }
 </script>
 <script src="bundle.js"></script>
-<!-- Copyright (c) 2023 8th Wall, Inc. -->
-<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+<div id="splashimage">
+  <img src="./assets/4thSpace.png" alt="4thSpace" />
+  <button id="start">You've Entered a 4thSpace</button>
+</div>
 <div id="orientationOverlay">
   <div id="message">
     <img src="./assets/rotate.svg" width="100px" />
@@ -100,7 +92,7 @@
   renderer="colorManagement: false"
   xrconfig
   xrlayers
-  xrweb
+  splash-screen
   device-orientation
   present-box>
   <a-assets>

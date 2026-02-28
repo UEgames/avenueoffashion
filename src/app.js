@@ -1,7 +1,3 @@
-// Copyright (c) 2023 8th Wall, Inc.
-
-// app.js is the main entry point for your 8th Wall web app. Code here will execute after head.html
-// is loaded, and before body.html is loaded.
 import './index.css'
 
 import {recenterComponent} from './components/recenter'
@@ -24,3 +20,6 @@ AFRAME.registerComponent('device-orientation', deviceOrientationComponent)
 
 import {presentBoxComponent} from './components/present-box'
 AFRAME.registerComponent('present-box', presentBoxComponent)
+
+import {splashScreenComponent} from './components/splash-screen'
+AFRAME.registerComponent('splash-screen', splashScreenComponent)
