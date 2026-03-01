@@ -4,9 +4,10 @@ const animateBalloonComponent = {
     const light = document.getElementById('light')
 
     const animate = () => {
+      const pos = this.el.object3D.position
       this.el.setAttribute('animation', {
         property: 'position',
-        from: '0 -7 -13',
+        from: `${pos.x.toFixed(3)} ${pos.y.toFixed(3)} ${pos.z.toFixed(3)}`,
         to: '0 10 -11',
         dur: 6000,
         delay: 0,

@@ -9,6 +9,9 @@ AFRAME.registerComponent('sky-remote-authoring', skyRemoteAuthoringComponent)
 import {animateBalloonComponent} from './components/animate-balloon'
 AFRAME.registerComponent('animate-balloon', animateBalloonComponent)
 
+import {flickBalloonComponent} from './components/flick-balloon'
+AFRAME.registerComponent('flick-balloon', flickBalloonComponent)
+
 import {transitionSceneComponent} from './components/transition-scene'
 AFRAME.registerComponent('transition-scene', transitionSceneComponent)
 
