@@ -4,6 +4,15 @@ const animateBalloonComponent = {
     const light = document.getElementById('light')
 
     const animate = () => {
+      // Remove listener immediately so a second sky event within the delay
+      // window can't trigger a duplicate animation.
+      this.el.sceneEl.removeEventListener('sky-coaching-overlay.hide', animate)
+      // Small settle delay: on refresh sky is detected before SLAM/XR has
+      // fully calibrated. 800 ms gives the pipeline time to stabilise.
+      setTimeout(startAnimation, 800)
+    }
+
+    const startAnimation = () => {
       const pos = this.el.object3D.position
       this.el.setAttribute('animation', {
         property: 'position',
@@ -42,10 +51,15 @@ const animateBalloonComponent = {
         light.setAttribute('xrextras-attach', {target: 'newBalloon'})
         light.setAttribute('light', {target: '#newBalloon'})
 
+        // Use the balloon's actual world position at transition time as the
+        // animation start so it lands correctly regardless of SLAM calibration.
+        const wp = balloon.object3D.position
+        const fromStr = `${wp.x.toFixed(3)} ${wp.y.toFixed(3)} ${wp.z.toFixed(3)}`
+
         // Animate the balloon from the transition point to the ground
         balloon.setAttribute('animation', {
           property: 'position',
-          from: '0 8 -9',
+          from: fromStr,
           to: '0 0 -6',
           dur: 5000,
           delay: 0,
@@ -67,9 +81,6 @@ const animateBalloonComponent = {
       setTimeout(() => {
         this.el.setAttribute('transition-scene', {direction: 'skyToSlam', id: 'newBalloon'})  // Time transition with animation speeds
       }, 8000)
-
-      // Animate Balloon when Sky is Found
-      this.el.sceneEl.removeEventListener('sky-coaching-overlay.hide', animate)
     }
     this.el.sceneEl.addEventListener('sky-coaching-overlay.hide', animate)
   },

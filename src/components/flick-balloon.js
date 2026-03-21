@@ -15,12 +15,18 @@ const flickBalloonComponent = {
     this._onTouchMove = this._onTouchMove.bind(this)
     this._onTouchEnd = this._onTouchEnd.bind(this)
 
-    this.el.sceneEl.addEventListener('renderstart', () => {
+    const attachToCanvas = () => {
       const canvas = this.el.sceneEl.canvas
+      if (!canvas) return
       canvas.addEventListener('touchstart', this._onTouchStart, {passive: false})
-      canvas.addEventListener('touchmove', this._onTouchMove, {passive: false})
-      canvas.addEventListener('touchend', this._onTouchEnd)
-    })
+      canvas.addEventListener('touchmove',  this._onTouchMove,  {passive: false})
+      canvas.addEventListener('touchend',   this._onTouchEnd)
+    }
+    if (this.el.sceneEl.renderer) {
+      attachToCanvas()
+    } else {
+      this.el.sceneEl.addEventListener('renderstart', attachToCanvas, {once: true})
+    }
 
     // Stop responding once launched via any mechanism (flick or natural sky detection)
     this.el.sceneEl.addEventListener('sky-coaching-overlay.hide', () => {
@@ -38,8 +44,9 @@ const flickBalloonComponent = {
   },
 
   _hitsBalloon(touch) {
+    const cam = document.getElementById('camera').getObject3D('camera')
+    if (!cam) return false
     const ndc = this._getNDC(touch)
-    const cam = this.el.sceneEl.camera
     this.raycaster.setFromCamera(ndc, cam)
     return this.raycaster.intersectObject(this.el.object3D, true).length > 0
   },

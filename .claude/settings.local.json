@@ -27,7 +27,10 @@
       "Bash(/c/Users/jwolf/AppData/Local/Programs/Python/Python312/python:*)",
       "Bash(gh auth:*)",
       "Bash(git config:*)",
-      "Bash(git:*)"
+      "Bash(git:*)",
+      "Bash(npm run:*)",
+      "Bash(cmd:*)",
+      "Bash(powershell:*)"
     ]
   }
 }

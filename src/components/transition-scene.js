@@ -21,10 +21,10 @@ const transitionSceneComponent = {
     const mesh = this.el.getObject3D('mesh')  // Grab the A-Frame Entity's Object3D
     newScene.appendChild(newEntity)
 
-    // Bake the Entity's Local Position, Rotation, and Scale into the Object3D
-    this.el.object3D.updateMatrix()
-    // Create a new Matrix4 and clone the Object3D's Position, Rotation, and Scale
-    const matrix = this.el.object3D.matrix.clone()
+    // Bake the Entity's World Position, Rotation, and Scale into the Object3D
+    this.el.object3D.updateWorldMatrix(true, false)
+    // Create a new Matrix4 and clone the Object3D's World Position, Rotation, and Scale
+    const matrix = this.el.object3D.matrixWorld.clone()
     this.el.removeObject3D('mesh')  // Remove Original Entity from the A-Frame Scene
     newEntity.setObject3D('mesh', mesh)  // Apply the original Object3D to the New Entity's Object3D
 
