@@ -227,7 +227,10 @@
     document.getElementById('directoryModal').style.display = 'flex'
   }
 
+  let currentBusiness = 0
+
   function showDetail(index) {
+    currentBusiness = index
     const biz = BUSINESSES[index]
 
     // Logo
@@ -287,10 +290,9 @@
 
     const biz = BUSINESSES[currentBusiness] || {}
     fetch(FORM_ACTION, {
-      method:  'POST',
-      mode:    'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({
+      method: 'POST',
+      mode:   'no-cors',
+      body:   new URLSearchParams({
         [ENTRY_EMAIL]:    email,
         [ENTRY_BUSINESS]: biz.name  || '',
         [ENTRY_PRIZE]:    biz.prize || '',
