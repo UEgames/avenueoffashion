@@ -276,10 +276,7 @@
   document.getElementById('giftClose').addEventListener('click', () => {
     document.getElementById('giftModal').style.display = 'none'
   })
-  const FORM_ACTION    = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfwkGnO2Q7k99MjcUutQpzbw2gHykTAGMTwf3dRSz6QcSq_yg/formResponse'
-  const ENTRY_EMAIL    = 'entry.1759039688'
-  const ENTRY_BUSINESS = 'entry.2113283375'
-  const ENTRY_PRIZE    = 'entry.502335687'
+  const FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSfwkGnO2Q7k99MjcUutQpzbw2gHykTAGMTwf3dRSz6QcSq_yg/formResponse'
 
   document.getElementById('giftSubmit').addEventListener('click', () => {
     const email = document.getElementById('giftEmail').value.trim()
@@ -289,14 +286,15 @@
     document.getElementById('giftSubmit').style.display  = 'none'
 
     const biz = BUSINESSES[currentBusiness] || {}
+    const formData = new FormData()
+    formData.append('entry.1759039688', email)
+    formData.append('entry.2113283375', biz.name  || '')
+    formData.append('entry.502335687',  biz.prize || '')
+
     fetch(FORM_ACTION, {
       method: 'POST',
       mode:   'no-cors',
-      body:   new URLSearchParams({
-        [ENTRY_EMAIL]:    email,
-        [ENTRY_BUSINESS]: biz.name  || '',
-        [ENTRY_PRIZE]:    biz.prize || '',
-      }).toString(),
+      body:   formData,
     }).catch(() => {})
   })
 </script>
