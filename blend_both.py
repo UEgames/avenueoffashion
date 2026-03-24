@@ -14,7 +14,7 @@ import os
 
 PROJECT_ROOT  = r"C:\Users\jwolf\Documents\uegames\8thwallprojects\prizeballoon"
 BALLOON_GLB   = os.path.join(PROJECT_ROOT, "src", "assets", "references", "balloon.glb")
-LIVERNOIS_PNG = os.path.join(PROJECT_ROOT, "src", "assets", "livernois.png")
+LIVERNOIS_PNG = os.path.join(PROJECT_ROOT, "src", "assets", "leo.png")
 OUTPUT_GLB    = os.path.join(PROJECT_ROOT, "src", "assets", "models", "balloon-both.glb")
 
 # ── 1. Clear scene ────────────────────────────────────────────────────────────
